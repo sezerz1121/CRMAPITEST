@@ -16,10 +16,10 @@ Grant the service account Editor access and enable Google Sheets API. The comple
 ## GitHub and Vercel setup
 
 1. Create a private GitHub repository and push the contents of this folder. `.gitignore` excludes local credentials and environment files.
-2. In Vercel, import that GitHub repository. Keep the project root at the repository root; `vercel.json` configures the Express serverless function.
-3. Add the environment variables below in Vercel Project Settings. Set `GOOGLE_SERVICE_ACCOUNT_JSON` to the full JSON value as a sensitive Vercel variable. Do not put the JSON file in GitHub.
-4. Enable Firebase Authentication in the Google Cloud/Firebase project and configure Google Sign-In in the Android client.
-5. Deploy. Check `/health`, then set the Android app's API URL to the deployed Vercel HTTPS domain.
+2. In Vercel, import that GitHub repository. Set the project root to the API files: the repository root if this folder is the repository, or `CRM API` if it is a subfolder in a monorepo. `vercel.json` builds the Express handler from `src/index.js` and routes API requests to it.
+3. Add the environment variables below in Vercel Project Settings. Set `GOOGLE_SERVICE_ACCOUNT_JSON` to the full JSON value with type **Secret**. Do not put the JSON file in GitHub.
+4. Enable Firebase Authentication in the Google Cloud/Firebase project and configure Google Sign-In in the Android client. Set `ALLOWED_USER_EMAIL=tatsamv900@gmail.com` in Vercel.
+5. Deploy. Check `/health`, then set the Android app's API URL to `https://crmapitest.vercel.app/`. If Vercel shows its own `404 NOT_FOUND` page, check that the latest deployment includes `src/index.js` and that `crmapitest.vercel.app` is assigned to that project.
 6. Pushes to the connected GitHub branch deploy automatically.
 
 ### Required Vercel environment variables
@@ -27,7 +27,7 @@ Grant the service account Editor access and enable Google Sheets API. The comple
 - `NODE_ENV=production`
 - `AUTH_REQUIRED=true`
 - `FIREBASE_PROJECT_ID=scrapedataforcoldcall`
-- `ALLOWED_USER_EMAIL`: the single Google account permitted to use the CRM
+- `ALLOWED_USER_EMAIL=tatsamv900@gmail.com`: the only Google account permitted to use the CRM
 - `GOOGLE_SERVICE_ACCOUNT_JSON`: full service-account JSON, set in Vercel only
 - `SHEET_ID=17EE42CkxDpM9p6m6-pXZ3mlUwVqLJsMPbTqX4XJndlw`
 - `SHEET_TAB=Leads`

@@ -1,0 +1,14 @@
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+service_account*.json
+service-account*.json
+*.log
+npm-debug.log*
+coverage/
+.DS_Store
+Thumbs.db
+*.pem
+*.key
