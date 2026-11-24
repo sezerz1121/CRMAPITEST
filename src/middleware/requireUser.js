@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 
 function firebaseApp() {
   if (getApps().length) return getApps()[0];
-  const projectId = process.env.FIREBASE_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT;
+  const projectId = process.env.FIREBASE_PROJECT_ID;
   const serviceJson = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
   const credential = serviceJson ? cert(JSON.parse(serviceJson)) : applicationDefault();
   return initializeApp({ credential, ...(projectId ? { projectId } : {}) });
